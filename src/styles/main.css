@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif;
   color: #333;
   background-color: #fff;
   margin: 0;
@@ -33,4 +33,39 @@ header {
 
 section {
  padding: 20px;
+}
+
+
+#content {
+  width: 60%;
+  margin: 0 auto;
+}
+
+
+/* tasks section */
+.tasks-section {
+
+  .create-task-input {
+    color: #414654;
+    border: none;
+    outline: none;
+    font-size: 22px;
+    width: 800px;
+    text-indent: 20px;
+  }
+  @-webkit-keyframes pulse {
+  0% {
+    background-color: #001F3F;
+  }
+  100% {
+    background-color: #FF4136;
+  }
+}
+
+  .task-card {
+    padding: 20px;
+    border-bottom: 1px solid #e3e3e3;
+    cursor: pointer;
+    animation: pulse 5s infinite;
+  }
 }

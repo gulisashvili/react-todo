@@ -10,7 +10,8 @@ export default React.createClass({
   },
   getInitialState () {
     return {
-      isUserAuthenticated: false
+      isUserAuthenticated: false,
+      tasks: []
     }
   },
 
@@ -57,16 +58,18 @@ export default React.createClass({
 
     return (
       <div>
+
         <header>
           <Link to="/"> React Todo App </Link>
           <Link style={styles.section} to="/tasks"> Tasks </Link>
           <a style={styles.fbAuthLink} href="#" onClick={this.handleAuth}> Login with Facebook </a>
           <a href="#" style={styles.section} onClick={this.handleLogOut}> Log out </a>
-
         </header>
+
         <section style={styles.section}>
           {this.props.children}
         </section>
+
       </div>
     )
   }

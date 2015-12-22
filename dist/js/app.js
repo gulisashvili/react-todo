@@ -23530,7 +23530,7 @@ _reactDom2['default'].render(_react2['default'].createElement(
   )
 ), document.getElementById('content'));
 
-},{"./components/App":211,"./components/Auth":212,"./components/Tasks":213,"./parse-helper/app":214,"react":209,"react-dom":27,"react-router":47}],211:[function(require,module,exports){
+},{"./components/App":211,"./components/Auth":212,"./components/Tasks":214,"./parse-helper/app":215,"react":209,"react-dom":27,"react-router":47}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23555,7 +23555,8 @@ exports['default'] = _react2['default'].createClass({
   },
   getInitialState: function getInitialState() {
     return {
-      isUserAuthenticated: false
+      isUserAuthenticated: false,
+      tasks: []
     };
   },
 
@@ -23688,6 +23689,34 @@ exports['default'] = _react2['default'].createClass({
 module.exports = exports['default'];
 
 },{"react":209}],213:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+exports["default"] = _react2["default"].createClass({
+  displayName: "Task",
+
+  render: function render() {
+    var task = this.props.task;
+
+    return _react2["default"].createElement(
+      "div",
+      { className: "task-card" },
+      task
+    );
+  }
+});
+module.exports = exports["default"];
+
+},{"react":209}],214:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23700,24 +23729,53 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Task = require('./Task');
+
+var _Task2 = _interopRequireDefault(_Task);
+
 exports['default'] = _react2['default'].createClass({
   displayName: 'Tasks',
+
+  getInitialState: function getInitialState() {
+    return {
+      tasks: []
+    };
+  },
+
+  handleKeyUp: function handleKeyUp(event) {
+    if (event.which === 13) {
+      var inputField = this.refs.input;
+      var inputFieldVal = inputField.value;
+
+      this.addTask(inputFieldVal);
+
+      inputField.value = '';
+    }
+  },
+
+  addTask: function addTask(newTask) {
+    var tasks = this.state.tasks;
+
+    tasks.push(newTask);
+
+    this.setState({ tasks: tasks });
+  },
 
   render: function render() {
     return _react2['default'].createElement(
       'div',
-      null,
-      _react2['default'].createElement(
-        'h3',
-        null,
-        ' Tasks '
-      )
+      { className: 'tasks-section' },
+      _react2['default'].createElement('input', { type: 'text', ref: 'input', className: 'create-task-input',
+        placeholder: 'What needs to be done?', onKeyUp: this.handleKeyUp }),
+      this.state.tasks.map(function (task, index) {
+        return _react2['default'].createElement(_Task2['default'], { key: index, task: task });
+      })
     );
   }
 });
 module.exports = exports['default'];
 
-},{"react":209}],214:[function(require,module,exports){
+},{"./Task":213,"react":209}],215:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
